@@ -1,53 +1,61 @@
 [user]
-	name = Adrian G Prado
-  email = adrian@garciaprado.es
+name  = Adrian G Prado
+email = adrian@garciaprado.es
 [core]
-  editor = vim
+editor = vim
 [color]
-  modified = blue
-  ui = true
+modified = blue
+ui = true
 [color "status"]
-  added = green
-  changed = cyan
+added = green
+changed = cyan
 [alias]
-  l = git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
+l = git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
 [alias]
-  aa = add --all
-  bv = branch -vv
-  ba = branch -ra
-  bd = branch -d
-  ca = commit --amend
-  cb = checkout -b
-  cm = commit -a --amend -C HEAD
-  ci = commit -a -v
-  co = checkout
-  di = diff
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  ld = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
-  ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-  mm = merge --no-ff
-  st = status --short --branch
-  tg = tag -a 
-  pu = push --tags
-  un = reset --hard HEAD  
-  uh = reset --hard HEAD^
+aa = add --all
+bv = branch -vv
+ba = branch -ra
+bd = branch -d
+ca = commit --amend
+cb = checkout -b
+cm = commit -a --amend -C HEAD
+ci = commit -a -v
+co = checkout
+di = diff
+ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+ld = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
+ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+mm = merge --no-ff
+st = status --short --branch
+tg = tag -a 
+pu = push --tags
+un = reset --hard HEAD  
+uh = reset --hard HEAD^
+
+# Fetch PR #1 from remote #2 and change branch
+pr  = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+# Remove all the branchs under heads/pr
+pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+# for bitbucket/stash remotes
+spr  = "!f() { git fetch -fu ${2:-origin} refs/pull-requests/$1/from:pr/$1 && git checkout pr/$1; }; f"
 [color]  
-  diff = auto  
-  status = auto  
-  branch = auto 
+diff = auto  
+status = auto  
+branch = auto 
 [branch]  
-  autosetuprebase = always
+autosetuprebase = always
 [push]
-  default = simple
+default = simple
 [http]
-  sslverify = false
+sslverify = false
 [filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
-  required = true
+clean = git-lfs clean %f
+smudge = git-lfs smudge %f
+required = true
 [merge]
-  tool = p4merge
+tool = p4merge
 [mergetool "p4merge"]
-  trustExitCode = false
+trustExitCode = false
 [diff]
-  tool = p4merge
+tool = p4merge
+
