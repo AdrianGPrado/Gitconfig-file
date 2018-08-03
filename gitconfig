@@ -52,7 +52,7 @@
 [branch]  
     autosetuprebase = always
 [push]
-    default = simple
+	default = matching
 [http]
     sslverify = true
 [filter "lfs"]
