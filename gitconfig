@@ -1,18 +1,17 @@
 [user]
-    name  = Adrian G Prado
-    email = adrian@garciaprado.es
-
+    name = Adrian Garcia Prado
+    email = GarciaPrado.Adrian@gmail.com
+[gpg]
+    program = gpg2
 [core]
-    editor = vim
-
+	editor = vim
+	excludesfile = ~/.gitignore
 [color]
     modified = blue
     ui = true
-
 [color "status"]
     added = green
     changed = cyan
-
 [alias]
     l = git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
     aa = add --all
@@ -30,7 +29,7 @@
     lds = log -5 --pretty=format:"%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short --graph
     ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
     lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''    %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
     lg = !"git lg1"
     lgs = !"git lg1 -10"
     mm = merge --no-ff
@@ -39,38 +38,31 @@
     pu = push --tags
     un = reset --hard HEAD  
     uh = reset --hard HEAD^
-
     # Fetch PR #1 from remote #2 and change branch
     pr  = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
     # Remove all the branchs under heads/pr
     pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
     # for bitbucket/stash remotes
     spr  = "!f() { git fetch -fu ${2:-origin} refs/pull-requests/$1/from:pr/$1 && git checkout pr/$1; }; f"
-
+	gc = commit --verbose
 [color]  
     diff = auto  
     status = auto  
     branch = auto 
-
 [branch]  
     autosetuprebase = always
-
 [push]
     default = simple
-
 [http]
     sslverify = true
-
 [filter "lfs"]
-    clean = git-lfs clean %f
-    smudge = git-lfs smudge %f
     required = true
-
+	process = git-lfs filter-process
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 [merge]
     tool = p4merge
-
 [mergetool "p4merge"]
     trustExitCode = false
-
 [diff]
-    tool = p4merge
+	tool = p4merge
